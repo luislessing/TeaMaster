@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Logo from '../assets/tea-14.svg'
 
 const TeaMaster = () => {
   const [ratings, setRatings] = useState({
@@ -88,11 +89,17 @@ const TeaMaster = () => {
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
               <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
-                TeaMaster
               </span>
             </h2>
-            <img src="/public/tea-14.svg" alt="TeaMaster Logo" className="h-20 w-20" />
-          </div>
+            <div className="flex items-center justify-between mb-6">
+  <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
+    <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
+      TeaMaster
+    </span>
+  </h2>
+  <img src={Logo} alt="TeaMaster Logo" className="h-20 w-20" />
+
+</div>          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>

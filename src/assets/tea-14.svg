@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#EAB16B;}
+	.st1{fill:none;stroke:#000000;stroke-width:5.874;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#F0E4D4;}
+	
+		.st3{opacity:0.6;fill:none;stroke:#FFFFFF;stroke-width:13.7061;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:#A9A453;}
+	.st5{fill:#567119;stroke:#000000;stroke-width:5.874;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g>
+	<polygon class="st0" points="193.3,451.6 409.6,451.6 409.6,201.8 364.2,60 147.9,60 193.3,201.8 	"/>
+	<line class="st1" x1="388.6" y1="136.1" x2="364.2" y2="60"/>
+	<polyline class="st1" points="147.9,60 193.3,201.8 193.3,451.6 409.6,451.6 409.6,201.8 393.7,152.1 	"/>
+	<polygon class="st2" points="318.8,451.6 102.5,451.6 102.5,201.8 147.9,60 364.2,60 318.8,201.8 	"/>
+	<polyline class="st1" points="216.5,60 364.2,60 318.8,201.8 318.8,451.6 102.5,451.6 102.5,201.8 147.9,60 190.9,60 	"/>
+	<line class="st1" x1="202.9" y1="60" x2="203.7" y2="60"/>
+	<line class="st3" x1="248" y1="69.8" x2="249.9" y2="69.8"/>
+	<line class="st3" x1="278.8" y1="69.8" x2="323.2" y2="69.8"/>
+	<line class="st1" x1="364.2" y1="451.6" x2="364.2" y2="60"/>
+	<line class="st1" x1="219.6" y1="91.1" x2="274.3" y2="91.1"/>
+	<g>
+		<path class="st4" d="M198.4,293c19.3,21.1,11.2,60,11.2,60s-39.4,4.6-58.7-16.5c-19.3-21.1-11.2-60-11.2-60S179,271.9,198.4,293z"
+			/>
+		<path class="st1" d="M161.7,276.8c12.3,1.5,27,5.6,36.6,16.2c19.3,21.1,11.2,60,11.2,60s-39.4,4.6-58.7-16.5
+			c-19.3-21.1-11.2-60-11.2-60s3.2-0.4,8.3-0.4"/>
+		<path class="st3" d="M169.4,288.1c8,1.9,16.1,5.4,21.8,11.5"/>
+		<path class="st1" d="M181.6,314.7c23.5,23.1,40.1,64.6,46.7,88.6"/>
+		<path class="st5" d="M221.8,308.4c-15.8,17.3-9.2,49.1-9.2,49.1s32.3,3.8,48.1-13.5c15.8-17.3,9.2-49.1,9.2-49.1
+			S237.6,291.1,221.8,308.4z"/>
+	</g>
+</g>
+</svg>

@@ -1,12 +1,34 @@
 {
   "name": "teamaster",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Tea Rating Application",
+  "author": "Luis Lessing",
+  "main": "electron/main.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:dev": "electron .",
+    "electron:build": "vite build && electron-builder"
+  },
+  "build": {
+    "appId": "com.teamaster.app",
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "public/tea-14.png",
+      "category": "Utility"
+    }
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -17,8 +39,11 @@
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
+    "electron": "28.0.0",
+    "electron-builder": "^24.9.1",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.3.0"
   }
 }

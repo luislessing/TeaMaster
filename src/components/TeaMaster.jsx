@@ -82,115 +82,130 @@ const TeaMaster = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-2xl font-bold mb-4">TeaMaster</h2>
-
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Eistee Name</label>
-            <input
-              type="text"
-              value={teeName}
-              onChange={(e) => setTeeName(e.target.value)}
-              className="w-full p-2 border rounded"
-            />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-gray-100">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
+              <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
+                TeaMaster
+              </span>
+            </h2>
+            <img src="/public/tea-14.svg" alt="TeaMaster Logo" className="h-20 w-20" />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Tester Name</label>
-            <input
-              type="text"
-              value={testerName}
-              onChange={(e) => setTesterName(e.target.value)}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-        </div>
 
-        {Object.entries(criteria).map(([key, { name, description }]) => (
-          <div key={key} className="mb-6">
-            <label className="block text-sm font-medium">{name}</label>
-            <p className="text-xs text-gray-500 mb-2">{description}</p>
-            <div className="relative pt-6 pb-2">
-              <div className="flex justify-between absolute top-0 w-full px-2">
-                {[0,2,4,6,8,10].map(num => (
-                  <span key={num} className="text-xs text-gray-500">{num}</span>
-                ))}
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Eistee Name</label>
               <input
-                type="range"
-                min="0"
-                max="10"
-                step="0.5"
-                value={ratings[key]}
-                onChange={(e) => setRatings(prev => ({
-                  ...prev,
-                  [key]: parseFloat(e.target.value)
-                }))}
-                className="w-full"
+                type="text"
+                value={teeName}
+                onChange={(e) => setTeeName(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                placeholder="z.B. Classic Lemon"
               />
-              <div className="text-center mt-2">
-                <span className="bg-blue-500 text-white px-2 py-1 rounded text-sm">
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Tester Name</label>
+              <input
+                type="text"
+                value={testerName}
+                onChange={(e) => setTesterName(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                placeholder="Dein Name"
+              />
+            </div>
+          </div>
+
+          {Object.entries(criteria).map(([key, { name, description }]) => (
+            <div key={key} className="mb-8 bg-gray-50 p-6 rounded-lg">
+              <div className="flex justify-between items-center mb-2">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700">{name}</label>
+                  <p className="text-sm text-gray-500">{description}</p>
+                </div>
+                <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                   {ratings[key]}
                 </span>
               </div>
-            </div>
-          </div>
-        ))}
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">Notizen</label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            className="w-full p-2 border rounded"
-            rows="3"
-          />
-        </div>
-
-        <div className="flex justify-between items-center">
-          <div className="text-lg font-semibold">
-            Gesamtwertung: {calculateScore()}/10
-          </div>
-          <button
-            onClick={handleSave}
-            disabled={!teeName || !testerName}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          >
-            Bewertung speichern
-          </button>
-        </div>
-      </div>
-
-      {savedRatings.length > 0 && (
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold mb-4">Gespeicherte Bewertungen</h2>
-          <div className="space-y-4">
-            {savedRatings.map((rating, index) => (
-              <div key={index} className="border-b pb-4 last:border-b-0">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-semibold">{rating.name}</h3>
-                    <p className="text-sm text-gray-500">Getestet von: {rating.tester}</p>
-                  </div>
-                  <span className="text-lg font-bold">{rating.score}/10</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
-                  {Object.entries(rating.ratings).map(([key, value]) => (
-                    <div key={key}>
-                      <span className="font-medium">{criteria[key].name}:</span> {value}/10
-                    </div>
+              <div className="relative pt-6">
+                <div className="flex justify-between absolute top-0 w-full px-2">
+                  {[0,2,4,6,8,10].map(num => (
+                    <span key={num} className="text-xs text-gray-400">{num}</span>
                   ))}
                 </div>
-                {rating.notes && (
-                  <p className="mt-2 text-sm text-gray-600">{rating.notes}</p>
-                )}
-                <p className="text-xs text-gray-400 mt-1">{rating.date}</p>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="0.5"
+                  value={ratings[key]}
+                  onChange={(e) => setRatings(prev => ({
+                    ...prev,
+                    [key]: parseFloat(e.target.value)
+                  }))}
+                  className="w-full"
+                />
               </div>
-            ))}
+            </div>
+          ))}
+
+          <div className="mb-6">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Notizen</label>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              rows="3"
+              placeholder="Zusätzliche Bemerkungen..."
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-gray-50 p-6 rounded-lg">
+            <div className="text-xl font-bold text-gray-800">
+              Gesamtwertung: <span className="text-blue-500">{calculateScore()}/10</span>
+            </div>
+            <button
+              onClick={handleSave}
+              disabled={!teeName || !testerName}
+              className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:from-blue-600 hover:to-blue-700 transition-all"
+            >
+              Bewertung speichern
+            </button>
           </div>
         </div>
-      )}
+
+        {savedRatings.length > 0 && (
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Gespeicherte Bewertungen</h2>
+            <div className="space-y-6">
+              {savedRatings.map((rating, index) => (
+                <div key={index} className="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h3 className="font-semibold text-lg text-gray-800">{rating.name}</h3>
+                      <p className="text-sm text-gray-500">Getestet von: {rating.tester}</p>
+                    </div>
+                    <span className="text-lg font-bold text-blue-500">{rating.score}/10</span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3 text-sm">
+                    {Object.entries(rating.ratings).map(([key, value]) => (
+                      <div key={key} className="bg-gray-50 p-2 rounded">
+                        <span className="font-medium text-gray-700">{criteria[key].name}:</span>
+                        <span className="text-gray-600"> {value}/10</span>
+                      </div>
+                    ))}
+                  </div>
+                  {rating.notes && (
+                    <p className="mt-3 text-sm text-gray-600 bg-gray-50 p-3 rounded">{rating.notes}</p>
+                  )}
+                  <p className="text-xs text-gray-400 mt-2">{rating.date}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

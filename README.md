@@ -44,8 +44,8 @@ The AppImage will be created in the `release` folder.
 - TailwindCSS
 
 ## ToDO
-- [ ] customise look
-- [ ] implement Logo
+- [x] customise look
+- [x] implement Logo
 - [ ] implement export option
 - [ ] implement visual charts 
 

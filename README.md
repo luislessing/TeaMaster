@@ -17,7 +17,7 @@ An Electron app for professional iced tea rating and evaluation.
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/TeaMaster.git
+git clone https://github.com/luislessing/TeaMaster.git
 cd TeaMaster
 npm install
 ```
@@ -42,6 +42,12 @@ The AppImage will be created in the `release` folder.
 - Electron
 - Vite
 - TailwindCSS
+
+## ToDO
+- [ ] customise look
+- [ ] implement Logo
+- [ ] implement export option
+- [ ] implement visual charts 
 
 ## License
 

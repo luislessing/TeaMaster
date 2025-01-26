@@ -1,12 +1,17 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import svgr from 'vite-plugin-svgr'
+import electron from 'vite-plugin-electron'
+import renderer from 'vite-plugin-electron-renderer'
 
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [
+    react(),
+    electron([
+      {
+        entry: 'electron/main.js',
+      },
+    ]),
+    renderer(),
+  ],
   base: './',
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets'
-  }
 })

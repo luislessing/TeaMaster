@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../assets/tea-14.svg'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import Logo from '../assets/tea-14.svg';
 
 const TeaMaster = () => {
   const [ratings, setRatings] = useState({
@@ -14,6 +15,7 @@ const TeaMaster = () => {
   const [testerName, setTesterName] = useState('');
   const [notes, setNotes] = useState('');
   const [savedRatings, setSavedRatings] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const criteria = {
     geschmack: {
@@ -54,6 +56,12 @@ const TeaMaster = () => {
     }, 0).toFixed(2);
   };
 
+  const handleDelete = (index) => {
+    const updated = savedRatings.filter((_, i) => i !== index);
+    setSavedRatings(updated);
+    localStorage.setItem('ratings', JSON.stringify(updated));
+  };
+
   const handleSave = () => {
     if (!teeName || !testerName) return;
 
@@ -67,8 +75,8 @@ const TeaMaster = () => {
     };
 
     const updated = [...savedRatings, newRating].sort((a, b) => b.score - a.score);
-    localStorage.setItem('ratings', JSON.stringify(updated));
     setSavedRatings(updated);
+    localStorage.setItem('ratings', JSON.stringify(updated));
 
     setTeeName('');
     setTesterName('');
@@ -82,6 +90,36 @@ const TeaMaster = () => {
     });
   };
 
+  const getAverageRatings = () => {
+    const sums = {};
+    const counts = {};
+    
+    savedRatings.forEach(rating => {
+      Object.entries(rating.ratings).forEach(([key, value]) => {
+        sums[key] = (sums[key] || 0) + value;
+        counts[key] = (counts[key] || 0) + 1;
+      });
+    });
+
+    return Object.entries(sums).map(([key, sum]) => ({
+      name: criteria[key].name,
+      average: (sum / counts[key]).toFixed(2)
+    }));
+  };
+
+  const getRadarData = (rating) => {
+    return Object.entries(rating.ratings).map(([key, value]) => ({
+      subject: criteria[key].name,
+      value: value
+    }));
+  };
+
+  const filteredRatings = savedRatings.filter(rating =>
+    rating.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    rating.tester.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    rating.notes?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
@@ -89,17 +127,11 @@ const TeaMaster = () => {
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
               <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
+                TeaMaster
               </span>
             </h2>
-            <div className="flex items-center justify-between mb-6">
-  <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
-    <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
-      TeaMaster
-    </span>
-  </h2>
-  <img src={Logo} alt="TeaMaster Logo" className="h-20 w-20" />
-
-</div>          </div>
+            <img src={Logo} alt="TeaMaster Logo" className="h-20 w-20" />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
@@ -183,17 +215,61 @@ const TeaMaster = () => {
         </div>
 
         {savedRatings.length > 0 && (
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 mb-8">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Durchschnittliche Bewertungen</h2>
+            <div className="h-64 w-full">
+              <ResponsiveContainer>
+                <BarChart data={getAverageRatings()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis domain={[0, 10]} />
+                  <Tooltip />
+                  <Bar dataKey="average" fill="#3B82F6" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        )}
+
+        {savedRatings.length > 0 && (
           <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Gespeicherte Bewertungen</h2>
+            <div className="mb-6">
+              <input
+                type="text"
+                placeholder="Bewertungen durchsuchen..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              />
+            </div>
             <div className="space-y-6">
-              {savedRatings.map((rating, index) => (
+              {filteredRatings.map((rating, index) => (
                 <div key={index} className="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
                   <div className="flex justify-between items-start mb-3">
                     <div>
                       <h3 className="font-semibold text-lg text-gray-800">{rating.name}</h3>
                       <p className="text-sm text-gray-500">Getestet von: {rating.tester}</p>
                     </div>
-                    <span className="text-lg font-bold text-blue-500">{rating.score}/10</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg font-bold text-blue-500">{rating.score}/10</span>
+                      <button
+                        onClick={() => handleDelete(index)}
+                        className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+                  <div className="h-64 w-full mb-4">
+                    <ResponsiveContainer>
+                      <RadarChart data={getRadarData(rating)}>
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey="subject" />
+                        <PolarRadiusAxis domain={[0, 10]} />
+                        <Radar name={rating.name} dataKey="value" fill="#3B82F6" fillOpacity={0.6} />
+                      </RadarChart>
+                    </ResponsiveContainer>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3 text-sm">
                     {Object.entries(rating.ratings).map(([key, value]) => (

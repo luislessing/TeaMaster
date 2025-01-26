@@ -1,6 +1,6 @@
 # TeeMaster
 
-An Electron app for professional iced tea rating and evaluation.
+An Electron app for iced tea rating and evaluation.
 
 ## Features
 

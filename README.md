@@ -1,18 +1,38 @@
 # TeeMaster
 
-An Electron app for iced tea rating and evaluation.
+A desktop application for rating and analyzing iced teas, built with React and Electron.
+Features
 
-## Features
+Rate iced teas on multiple criteria:
 
-- Rating system with weighted criteria:
-  - Taste (35%)
-  - Refreshment (25%)
-  - Sweetness (15%)
-  - Naturalness (15%)
-  - Value for Money (10%)
-- Local storage of ratings
-- Clear overview of all ratings
-- Ranking system
+Taste balance and intensity (35%)
+Sweetness balance (15%)
+Refreshing quality (25%)
+Natural taste vs artificial (15%)
+Price-performance ratio (10%)
+
+
+Visual data analysis through:
+
+Bar charts showing average ratings across all criteria
+Radar charts displaying individual tea profiles
+Comprehensive rating history
+
+
+Search and filter functionality
+Import/Export capability for data backup
+Local data persistence
+
+Screenshots
+
+![UI](webp/UI.webp)
+  TeaMasters UI
+
+![Bar Chart](webp/barchart.webp)
+  Bar Chart showing the average Ranking
+
+![Ranking System](webp/Bewertung.webp)
+  Ranking per Tea including Spider Plots
 
 ## Installation
 
@@ -21,7 +41,7 @@ git clone https://github.com/luislessing/TeaMaster.git
 cd TeaMaster
 npm install
 ```
-yxssdf
+
 ## Development
 
 ```bash
@@ -114,6 +134,9 @@ webroot/
 - [ ] Multilanguage support
 - [ ] implement Tag System
 - [ ] implement Darkmode
+
+## Customization
+Feel free to adapt and modify the code to suit your testing needs. The application can be customized for different beverages, rating criteria, or evaluation purposes.
 
 ## License
 

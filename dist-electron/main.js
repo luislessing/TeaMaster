@@ -222,7 +222,7 @@ M.exports;
       type: "value",
       value: t
     };
-  }, _ = function(e) {
+  }, h = function(e) {
     const r = new Error(e);
     throw r.code = "EBADRPC", r.errno = -72, r;
   }, U = (e, r) => {
@@ -240,7 +240,7 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
     get(t, o, n) {
       return o === "name" ? r : Reflect.get(t, o, n);
     }
-  }), h = function(e, r, t, o) {
+  }), p = function(e, r, t, o) {
     const n = function(s) {
       switch (s.type) {
         case "nativeimage":
@@ -250,7 +250,7 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
         case "remote-object":
           return u.default.get(s.id);
         case "array":
-          return h(e, r, t, s.value);
+          return p(e, r, t, s.value);
         case "buffer":
           return Buffer.from(s.value.buffer, s.value.byteOffset, s.value.byteLength);
         case "promise":
@@ -261,8 +261,8 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
           const E = s.name !== "Object" ? /* @__PURE__ */ Object.create({
             constructor: ee(Object, s.name)
           }) : {};
-          for (const { name: R, value: p } of s.members)
-            E[R] = n(p);
+          for (const { name: R, value: _ } of s.members)
+            E[R] = n(_);
           return E;
         }
         case "function-with-return-value": {
@@ -275,7 +275,7 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
           const E = [t, s.id], R = A(E);
           if (R !== void 0)
             return R;
-          const p = function(...se) {
+          const _ = function(...se) {
             let D = !1;
             if (!e.isDestroyed())
               try {
@@ -283,9 +283,9 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
               } catch (ce) {
                 console.warn(`sendToFrame() failed: ${ce}`);
               }
-            D || U(this, p);
+            D || U(this, _);
           };
-          return k.set(p, s.location), Object.defineProperty(p, "length", { value: s.length }), x(E, e, r, p), p;
+          return k.set(_, s.location), Object.defineProperty(_, "length", { value: s.length }), x(E, e, r, _), _;
         }
         default:
           throw new TypeError(`Unknown type: ${s.type}`);
@@ -393,13 +393,13 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
       }
       return m(e.sender, r, o.returnValue);
     }), b("REMOTE_BROWSER_CONSTRUCTOR", function(e, r, t, o) {
-      o = h(e.sender, e.frameId, r, o);
+      o = p(e.sender, e.frameId, r, o);
       const n = u.default.get(t);
-      return n == null && _(`Cannot call constructor on missing remote object ${t}`), m(e.sender, r, new n(...o));
+      return n == null && h(`Cannot call constructor on missing remote object ${t}`), m(e.sender, r, new n(...o));
     }), b("REMOTE_BROWSER_FUNCTION_CALL", function(e, r, t, o) {
-      o = h(e.sender, e.frameId, r, o);
+      o = p(e.sender, e.frameId, r, o);
       const n = u.default.get(t);
-      n == null && _(`Cannot call function on missing remote object ${t}`);
+      n == null && h(`Cannot call function on missing remote object ${t}`);
       try {
         return m(e.sender, r, n(...o), !0);
       } catch (s) {
@@ -409,13 +409,13 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
         throw E.cause = s, E;
       }
     }), b("REMOTE_BROWSER_MEMBER_CONSTRUCTOR", function(e, r, t, o, n) {
-      n = h(e.sender, e.frameId, r, n);
+      n = p(e.sender, e.frameId, r, n);
       const s = u.default.get(t);
-      return s == null && _(`Cannot call constructor '${o}' on missing remote object ${t}`), m(e.sender, r, new s[o](...n));
+      return s == null && h(`Cannot call constructor '${o}' on missing remote object ${t}`), m(e.sender, r, new s[o](...n));
     }), b("REMOTE_BROWSER_MEMBER_CALL", function(e, r, t, o, n) {
-      n = h(e.sender, e.frameId, r, n);
+      n = p(e.sender, e.frameId, r, n);
       const s = u.default.get(t);
-      s == null && _(`Cannot call method '${o}' on missing remote object ${t}`);
+      s == null && h(`Cannot call method '${o}' on missing remote object ${t}`);
       try {
         return m(e.sender, r, s[o](...n), !0);
       } catch (E) {
@@ -424,22 +424,22 @@ Remote event names: ${n.join(", ")}`, n.forEach((s) => {
         throw R.cause = E, R;
       }
     }), b("REMOTE_BROWSER_MEMBER_SET", function(e, r, t, o, n) {
-      n = h(e.sender, e.frameId, r, n);
+      n = p(e.sender, e.frameId, r, n);
       const s = u.default.get(t);
-      return s == null && _(`Cannot set property '${o}' on missing remote object ${t}`), s[o] = n[0], null;
+      return s == null && h(`Cannot set property '${o}' on missing remote object ${t}`), s[o] = n[0], null;
     }), b("REMOTE_BROWSER_MEMBER_GET", function(e, r, t, o) {
       const n = u.default.get(t);
-      return n == null && _(`Cannot get property '${o}' on missing remote object ${t}`), m(e.sender, r, n[o]);
+      return n == null && h(`Cannot get property '${o}' on missing remote object ${t}`), m(e.sender, r, n[o]);
     }), b("REMOTE_BROWSER_DEREFERENCE", function(e, r, t) {
       u.default.remove(e.sender, r, t);
     }), b("REMOTE_BROWSER_CONTEXT_RELEASE", (e, r) => (u.default.clear(e.sender, r), null));
   }
   c.initialize = ie;
 })(M, M.exports);
-var pe = M.exports;
+var _e = M.exports;
 (function(i) {
   Object.defineProperty(i, "__esModule", { value: !0 }), i.enable = i.isInitialized = i.initialize = void 0;
-  var c = pe;
+  var c = _e;
   Object.defineProperty(i, "initialize", { enumerable: !0, get: function() {
     return c.initialize;
   } }), Object.defineProperty(i, "isInitialized", { enumerable: !0, get: function() {
@@ -450,8 +450,8 @@ var pe = M.exports;
 })(q);
 var v = q;
 v.initialize();
-const _e = le(import.meta.url);
-ue.dirname(_e);
+const he = le(import.meta.url);
+ue.dirname(he);
 function X() {
   const i = new G({
     width: 1200,
@@ -461,7 +461,7 @@ function X() {
       contextIsolation: !1
     }
   });
-  v.enable(i.webContents), i.webContents.openDevTools(), process.env.VITE_DEV_SERVER_URL ? i.loadURL(process.env.VITE_DEV_SERVER_URL) : i.loadFile("dist/index.html");
+  v.enable(i.webContents), process.env.VITE_DEV_SERVER_URL ? i.loadURL(process.env.VITE_DEV_SERVER_URL) : i.loadFile("dist/index.html");
 }
 C.whenReady().then(X);
 C.on("window-all-closed", () => {

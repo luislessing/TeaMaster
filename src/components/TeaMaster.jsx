@@ -130,6 +130,49 @@ const TeaMaster = () => {
                 TeaMaster
               </span>
             </h2>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => {
+                  const dataStr = JSON.stringify(savedRatings, null, 2);
+                  const blob = new Blob([dataStr], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = 'eistee-bewertungen.json';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(url);
+                }}
+                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
+              >
+                Export
+              </button>
+              <label className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all cursor-pointer">
+                Import
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                      try {
+                        const imported = JSON.parse(e.target.result);
+                        setSavedRatings(imported);
+                        localStorage.setItem('ratings', JSON.stringify(imported));
+                      } catch (error) {
+                        console.error('Error importing ratings:', error);
+                        alert('Fehler beim Importieren der Datei');
+                      }
+                    };
+                    reader.readAsText(file);
+                  }}
+                  className="hidden"
+                />
+              </label>
+            </div>
             <img src={Logo} alt="TeaMaster Logo" className="h-20 w-20" />
           </div>
 

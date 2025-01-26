@@ -20,8 +20,6 @@ function createWindow() {
 
   enable(win.webContents)
 
-  win.webContents.openDevTools()
-
   if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL)
   } else {

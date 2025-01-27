@@ -133,7 +133,7 @@ webroot/
 - [ ] User support
 - [ ] Multilanguage support
 - [ ] implement Tag System
-- [ ] implement Darkmode
+- [x] implement Darkmode
 
 ## Customization
 Feel free to adapt and modify the code to suit your testing needs. The application can be customized for different beverages, rating criteria, or evaluation purposes.
